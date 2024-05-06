@@ -27331,86 +27331,37 @@ var _movieView = require("../movie-view/movie-view");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
-    const [movies, setMovies] = (0, _react.useState)([
-        {
-            _id: 1,
-            Title: "Oldboy",
-            Description: "After being kidnapped and imprisoned for fifteen years, Oh Dae-Su is released, only to find that he must find his captor in five days.",
-            Genre: {
-                Name: "Thriller",
-                Description: "Movies that create suspense, tension, and excitement, often involving danger and unexpected twists."
-            },
-            Director: {
-                Name: "Park Chan-wook",
-                Bio: "Park Chan-wook is a South Korean film director, screenwriter, producer, and former critic.",
-                Birth: "1963"
-            },
-            ImagePath: "oldboy.jpg",
-            Featured: true
-        },
-        {
-            _id: 2,
-            Title: "Cinema Paradiso",
-            Description: "A filmmaker recalls his childhood when falling in love with the pictures at the cinema of his home village and forms a deep friendship with the cinema's projectionist.",
-            Genre: {
-                Name: "Drama",
-                Description: "Movies that focus on character development, emotion, and interpersonal relationships."
-            },
-            Director: {
-                Name: "Giuseppe Tornatore",
-                Bio: "Giuseppe Tornatore is an Italian film director and screenwriter.",
-                Birth: "1956"
-            },
-            ImagePath: "cinema_paradiso.jpg",
-            Featured: false
-        },
-        {
-            _id: 3,
-            Title: "Pan's Labyrinth",
-            Description: "In the Falangist Spain of 1944, the bookish young stepdaughter of a sadistic army officer escapes into an eerie but captivating fantasy world.",
-            Genre: {
-                Name: "Fantasy",
-                Description: "Movies that feature elements of magic, supernatural beings, and imaginary worlds."
-            },
-            Director: {
-                Name: "Guillermo del Toro",
-                Bio: "Guillermo del Toro is a Mexican filmmaker, author, and actor.",
-                Birth: "1964"
-            },
-            ImagePath: "pans_labyrinth.jpg",
-            Featured: false
-        },
-        {
-            _id: 4,
-            Title: "Y Tu Mam\xe1 Tambi\xe9n",
-            Description: "In Mexico, two teenage boys and an attractive older woman embark on a road trip and learn a thing or two about life, friendship, sex, and each other.",
-            Genre: {
-                Name: "Drama",
-                Description: "Movies that focus on character development, emotion, and interpersonal relationships."
-            },
-            Director: {
-                Name: "Alfonso Cuar\xf3n",
-                Bio: "Alfonso Cuar\xf3n is a Mexican film director, screenwriter, producer, and editor.",
-                Birth: "1961"
-            },
-            ImagePath: "y_tu_mama_tambien.jpg",
-            Featured: false
-        }
-    ]);
+    const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
+    (0, _react.useEffect)(()=>{
+        fetch("https://getflix-29822f4978ec.herokuapp.com/movies").then((response)=>response.json()).then((movies)=>{
+            const moviesApi = movies.map((movie)=>{
+                return {
+                    id: movie._id,
+                    title: movie.title,
+                    description: movie.Description,
+                    imagePath: movie.ImagePath,
+                    genre: movie.Genre,
+                    director: movie.Director,
+                    featured: movie.Featured
+                };
+            });
+            setMovies(moviesApi);
+        });
+    }, []);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 77,
+        lineNumber: 31,
         columnNumber: 11
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 82,
+        lineNumber: 36,
         columnNumber: 16
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27421,16 +27372,16 @@ const MainView = ()=>{
                 }
             }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 88,
+                lineNumber: 42,
                 columnNumber: 17
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 86,
+        lineNumber: 40,
         columnNumber: 9
     }, undefined);
 };
-_s(MainView, "QRLGGcjNME0cmVN1RmFaFmX1jC0=");
+_s(MainView, "PO+XgOji7E32nFJj3H5UPLPJ7w4=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -27447,10 +27398,13 @@ var prevRefreshSig = window.$RefreshSig$;
 $parcel$ReactRefreshHelpers$67b2.prelude(module);
 
 try {
+// Import the PropTypes library
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 const MovieCard = ({ movie, onMovieClick })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         onClick: ()=>{
@@ -27459,11 +27413,23 @@ const MovieCard = ({ movie, onMovieClick })=>{
         children: movie.Title
     }, void 0, false, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 3,
+        lineNumber: 6,
         columnNumber: 9
     }, undefined);
 };
 _c = MovieCard;
+// Here is where we define all the props constraints for the BookCard
+MovieCard.proptypes = {
+    movie: (0, _propTypesDefault.default).shape({
+        title: (0, _propTypesDefault.default).string.isRequired,
+        description: (0, _propTypesDefault.default).string.isRequired,
+        image: (0, _propTypesDefault.default).string.isRequired,
+        genre: (0, _propTypesDefault.default).string.isRequired,
+        director: (0, _propTypesDefault.default).string.isRequired,
+        featured: (0, _propTypesDefault.default).string.isRequired
+    }).isRequired,
+    onMovieClick: (0, _propTypesDefault.default).func.isRequired
+};
 var _c;
 $RefreshReg$(_c, "MovieCard");
 

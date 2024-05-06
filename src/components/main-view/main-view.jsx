@@ -10,8 +10,19 @@ export const MainView = () => {
     useEffect(() => {
       fetch("https://getflix-29822f4978ec.herokuapp.com/movies")
         .then((response) => response.json())
-        .then((data) => {
-          console.log("movies from api", data);
+        .then((movies) => {
+          const moviesApi = movies.map((movie) => {
+            return {
+              id:movie._id,
+              title: movie.title,
+              description: movie.Description,
+              imagePath: movie.ImagePath,
+              genre: movie.Genre,
+              director: movie.Director,
+              featured: movie.Featured
+            }
+          });
+          setMovies(moviesApi);
         });
     }, []);
 
