@@ -10,10 +10,10 @@ export const SignupView = () => {
         event.preventDefault();
 
         const data = {
-          username: username,
-          password: password,
-          email: email,
-          birthday: birthday  
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday  
         };
 
         fetch("https://getflix-29822f4978ec.herokuapp.com/users", {

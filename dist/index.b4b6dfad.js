@@ -28380,8 +28380,8 @@ const LoginView = ({ onLoggedIn })=>{
         // this prevents the default behaviour of the form which is to reload the entire page
         event.preventDefault();
         const data = {
-            username: username,
-            password: password
+            Username: username,
+            Password: password
         };
         fetch("https://getflix-29822f4978ec.herokuapp.com/login", {
             method: "POST",
@@ -28490,10 +28490,10 @@ const SignupView = ()=>{
     const handleSubmit = (event)=>{
         event.preventDefault();
         const data = {
-            username: username,
-            password: password,
-            email: email,
-            birthday: birthday
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday
         };
         fetch("https://getflix-29822f4978ec.herokuapp.com/users", {
             method: "POST",
