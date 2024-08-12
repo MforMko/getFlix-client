@@ -5,15 +5,17 @@ import Button from "react-bootstrap/Button";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
-export const MovieView = ({ movies }) => {
-    const { movieId } = useParams();
 
+export const MovieView = ({ movies, token, user }) => {
+    const { movieId } = useParams();
     const movie = movies.find((m) => m.id === movieId);
     
+    
+
     return (
         <Row className="justify-content-md-center">
             <Col md={8}>
-                <img src={movie.imagePath} />
+                <img src={movie.imagePath} alt={movie.title} classname="movie-image" />
             </Col>
             <Col>
                 <span>Title: </span>
@@ -22,6 +24,15 @@ export const MovieView = ({ movies }) => {
             <Col>
                 <span>Description: </span>
                 <span>{movie.description}</span>
+            </Col>
+            <Col>
+                <Button
+                    variant="primary"
+                    onClick={() => addToFavourites(movie.id)}
+                    style={{ cursor: "pointer" }}
+                    >
+                        Add to Favourites
+                </Button>
             </Col>
             <Link to={`/`}>
                 <Button 

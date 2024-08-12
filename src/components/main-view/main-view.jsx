@@ -44,6 +44,25 @@ export const MainView = () => {
       });
     }, [token]);
 
+    const addToFavourites = (movieId) => {
+      fetch(`https://getflix-29822f4978ec.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
+          method: 'POST',
+          headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json'
+          }
+          })
+          .then(response => {
+              if(response.ok) {
+                  alert('Movie added to favourites!');
+                  } else {
+                      alert('Failed to add movie to favourites.');
+                  }
+              })
+              .catch(error => console.error('Error adding movie to favourites:', error));
+  };
+
+
     return (
       <BrowserRouter>
         <NavigationBar
@@ -94,7 +113,7 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <Col md={8}>
-                    <MovieView movies={movies} />
+                    <MovieView movies={movies} token={token} user={user} />
                   </Col>
                 )
               }
@@ -116,6 +135,7 @@ export const MainView = () => {
                             onMovieClick={(newSelectedMovie) => {
                               setSelectedMovie(newSelectedMovie);
                             }}
+                            onFavourite={addToFavourites}
                           />
                         </Col>
                       ))

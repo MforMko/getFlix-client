@@ -3,20 +3,23 @@ import PropTypes from "prop-types"; // Import the PropTypes library
 import { Row, Col, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const MovieCard = ({ movie }) => {
+export const MovieCard = ({ movie, onFavourite  }) => {
     return (
         <Col md={10}>
           <Card>
               <Card.Img variant="top" src={movie.imagePath} />
               <Card.Body>
                 <Col>
-                <Card.Title>{movie.title}</Card.Title>
-                <Card.Text>{movie.description}</Card.Text>
-                <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
-                  <Button variant="link">
-                    Open
+                  <Card.Title>{movie.title}</Card.Title>
+                  <Card.Text>{movie.description}</Card.Text>
+                  <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+                    <Button variant="link">
+                      Open
+                    </Button>
+                  </Link>
+                  <Button variant="primary" onClick={() => onFavourite(movie.id)}>
+                    Add to Favourites
                   </Button>
-                </Link>
                 </Col>
                </Card.Body>
           </Card>
@@ -37,4 +40,5 @@ export const MovieCard = ({ movie }) => {
         director: PropTypes.string.isRequired,
         featured: PropTypes.bool
       }).isRequired,
+      onFavourite: PropTypes.func.isRequired,
     };

@@ -89,6 +89,31 @@ export const ProfileView = ({ token }) => {
         return <div>Loading...</div>;
     }
 
+    const removeFromFavourites = (movieId) => {
+        fetch(`https://getflix-29822f4978ec.herokuapp.com/users/${user.Username}/${movieId}`, {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${token}` },
+        })
+        .then(response => {
+            if (response.ok) {
+                const updatedUser = {
+                    ...user,
+                    FavouriteMovies: user.FavouriteMovies.filter(id => id !== movieId)
+                };
+                setUser(updatedUser);
+                localStorage.setItem('user', JSON.stringify(updatedUser));
+                alert('Movie removed from favourites!');
+            } else {
+                alert('Failed to remove movie from favourites.');
+            }
+        })
+        .catch(error => console.error('Error removing movie from favourites:', error))
+    };
+
+    if (!user) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <Container>
             <Row className="justify-content-md-center">
@@ -106,7 +131,17 @@ export const ProfileView = ({ token }) => {
                                 <strong>Birthday:</strong> {user.Birthday}
                             </Card.Text>
                             <Card.Text>
-                                <strong>Favourite Movies:</strong> {user.FavouriteMovies.join(', ')}
+                                <strong>Favourite Movies:</strong>
+                                <ul>
+                                    {user.FavouriteMovies.map(movieId => (
+                                        <li key={movieId}> 
+                                            {movieId} {/* You can replace this with movie title or any other data you have */}
+                                            <Button variant="danger" size="sm" onClick={() => removeFromFavourites(movieId)}>
+                                                Remove
+                                            </Button>
+                                        </li>
+                                    ))}
+                                </ul>
                             </Card.Text>
                             <h3>Update Profile</h3>
                             <Form onSubmit={handleFormSubmit}>
