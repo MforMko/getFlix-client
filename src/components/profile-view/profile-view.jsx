@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { ProfileInfo } from './profile-info';
+import { FavouriteMoviesList } from './favourite-movies-list';
+import { ProfileForm } from './profile-form';
+import { DeregisterButton } from './dergister-button';
 
 export const ProfileView = ({ token }) => {            
             const { userId } = useParams();
@@ -121,77 +125,18 @@ export const ProfileView = ({ token }) => {
                     <Card>
                         <Card.Body>
                             <Card.Title><h3>{user.Username}'s Profile</h3></Card.Title>
-                            <Card.Text>
-                                <strong>Username:</strong> {user.Username}
-                            </Card.Text>
-                            <Card.Text>
-                                <strong>Email:</strong> {user.Email}
-                            </Card.Text>
-                            <Card.Text>
-                                <strong>Birthday:</strong> {user.Birthday}
-                            </Card.Text>
-                            <Card.Text>
-                                <strong>Favourite Movies:</strong>
-                                <ul>
-                                    {user.FavouriteMovies.map(movieId => (
-                                        <li key={movieId}> 
-                                            {movieId} {/* You can replace this with movie title or any other data you have */}
-                                            <Button variant="danger" size="sm" onClick={() => removeFromFavourites(movieId)}>
-                                                Remove
-                                            </Button>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </Card.Text>
+                            <ProfileInfo user={user} />
+                            <FavouriteMoviesList
+                                favouriteMovies={user.FavouriteMovies}
+                                removeFromFavourites={removeFromFavourites}
+                            />
                             <h3>Update Profile</h3>
-                            <Form onSubmit={handleFormSubmit}>
-                                <Form.Group controlId="formUsername">
-                                    <Form.Label>Username</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="Username"
-                                        value={formData.Username}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </Form.Group>
-                                <Form.Group controlId="formPassword">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control
-                                        type="password"
-                                        name="Password"
-                                        value={formData.Password}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </Form.Group>
-                                <Form.Group controlId="formEmail">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control
-                                        type="email"
-                                        name="Email"
-                                        value={formData.Email}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </Form.Group>
-                                <Form.Group controlId="formBirthday">
-                                    <Form.Label>Birthday</Form.Label>
-                                    <Form.Control
-                                        type="date"
-                                        name="Birthday"
-                                        value={formData.Birthday}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </Form.Group>
-                                <Button variant="primary" type="submit">
-                                    Update
-                                </Button>
-                            </Form>
-                            <Button variant="danger" onClick={handleDeregister} className="mt-3">
-                                Delete Account
-                            </Button>
+                            <ProfileForm
+                                formData={formData}
+                                handleInputChange={handleInputChange}
+                                handleFormSubmit={handleFormSubmit}
+                            />
+                            <DeregisterButton handleDeregister={handleDeregister} />
                             {/* Add more user information here */}
                         </Card.Body>
                     </Card>

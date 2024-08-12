@@ -6,7 +6,7 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
 
-export const MovieView = ({ movies, token, user }) => {
+export const MovieView = ({ movies, token, user, addToFavourites }) => {
     const { movieId } = useParams();
     const movie = movies.find((m) => m.id === movieId);
     
