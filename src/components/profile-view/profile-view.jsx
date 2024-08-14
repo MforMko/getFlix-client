@@ -121,21 +121,44 @@ export const ProfileView = ({ token }) => {
     return (
         <Container>
             <Row className="justify-content-md-center">
-                <Col md={8}>
+                <Col xs={12} sm={4}>
                     <Card>
                         <Card.Body>
                             <Card.Title><h3>{user.Username}'s Profile</h3></Card.Title>
                             <ProfileInfo user={user} />
-                            <FavouriteMoviesList
-                                favouriteMovies={user.FavouriteMovies}
-                                removeFromFavourites={removeFromFavourites}
-                            />
-                            <h3>Update Profile</h3>
-                            <ProfileForm
-                                formData={formData}
-                                handleInputChange={handleInputChange}
-                                handleFormSubmit={handleFormSubmit}
-                            />
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col xs={12} sm={8}>  
+                    <Card>
+                        <Card.Body>
+                            <Card.Title><h3>Update Profile</h3></Card.Title>
+                                <ProfileForm
+                                    formData={formData}
+                                    handleInputChange={handleInputChange}
+                                    handleFormSubmit={handleFormSubmit}
+                                />
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Card>
+                        <Card.Body>
+                            <Card.Title><h3>Favourite Movies</h3></Card.Title>
+                                <FavouriteMoviesList
+                                        favouriteMovies={user.FavouriteMovies}
+                                        removeFromFavourites={removeFromFavourites}
+                                    />
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Card>
+                        <Card.Body>
                             <DeregisterButton handleDeregister={handleDeregister} />
                             {/* Add more user information here */}
                         </Card.Body>
