@@ -42900,37 +42900,55 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
 const FavouriteMoviesList = ({ favouriteMovies, removeFromFavourites })=>{
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
-            children: favouriteMovies.map((movieId)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
-                    children: [
-                        movieId,
-                        " ",
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
-                            variant: "danger",
-                            size: "sm",
-                            onClick: ()=>removeFromFavourites(movieId),
-                            children: "Remove"
-                        }, void 0, false, {
-                            fileName: "src/components/profile-view/favourite-movies-list.jsx",
-                            lineNumber: 12,
-                            columnNumber: 25
-                        }, undefined)
-                    ]
-                }, movieId, true, {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
+        children: favouriteMovies.map((movieId)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
+                xs: 12,
+                md: 6,
+                lg: 3,
+                className: "mb-4",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Title, {
+                                children: [
+                                    movieId,
+                                    " "
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/profile-view/favourite-movies-list.jsx",
+                                lineNumber: 12,
+                                columnNumber: 33
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                                variant: "danger",
+                                size: "sm",
+                                onClick: ()=>removeFromFavourites(movieId),
+                                children: "Remove from favourites"
+                            }, void 0, false, {
+                                fileName: "src/components/profile-view/favourite-movies-list.jsx",
+                                lineNumber: 13,
+                                columnNumber: 33
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/profile-view/favourite-movies-list.jsx",
+                        lineNumber: 11,
+                        columnNumber: 29
+                    }, undefined)
+                }, void 0, false, {
                     fileName: "src/components/profile-view/favourite-movies-list.jsx",
-                    lineNumber: 9,
-                    columnNumber: 21
-                }, undefined))
-        }, void 0, false, {
-            fileName: "src/components/profile-view/favourite-movies-list.jsx",
-            lineNumber: 7,
-            columnNumber: 13
-        }, undefined)
+                    lineNumber: 10,
+                    columnNumber: 25
+                }, undefined)
+            }, movieId, false, {
+                fileName: "src/components/profile-view/favourite-movies-list.jsx",
+                lineNumber: 9,
+                columnNumber: 21
+            }, undefined))
     }, void 0, false, {
         fileName: "src/components/profile-view/favourite-movies-list.jsx",
-        lineNumber: 6,
-        columnNumber: 9
+        lineNumber: 7,
+        columnNumber: 13
     }, undefined);
 };
 _c = FavouriteMoviesList;
