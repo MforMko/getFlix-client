@@ -27,8 +27,6 @@ export const MainView = () => {
       })
       .then((response) => response.json())
       .then((movies) => {
-        console.log("Movies data: ", movies);
-
         const moviesApi = movies.map((movie) => {
           return {
             id: movie._id,
@@ -45,22 +43,37 @@ export const MainView = () => {
     }, [token]);
 
     const addToFavourites = (movieId) => {
+      // Assuming `user` is an object that contains a `FavouriteMovies` array
+      if (user.FavouriteMovies.includes(movieId)) {
+          alert('This movie is already in your favourites list.');
+          return;
+      }
+  
       fetch(`https://getflix-29822f4978ec.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
           method: 'POST',
           headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json'
           }
-          })
-          .then(response => {
-              if(response.ok) {
-                  alert('Movie added to favourites!');
-                  } else {
-                      alert('Failed to add movie to favourites.');
-                  }
-              })
-              .catch(error => console.error('Error adding movie to favourites:', error));
+      })
+      .then(response => {
+          if (response.ok) {
+              return response.json(); // Assuming the API returns some JSON data
+          } else {
+              return Promise.reject('Failed to add movie to favourites.');
+          }
+      })
+      .then(data => {
+          // Update the user state to reflect the new favorite movie list
+          setUser({ ...user, FavouriteMovies: [...user.FavouriteMovies, movieId] });
+          alert('Movie added to favourites!');
+      })
+      .catch(error => {
+          console.error('Error adding movie to favourites:', error);
+          alert(error);
+      });
   };
+  
 
 
     return (
