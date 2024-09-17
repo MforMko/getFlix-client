@@ -10,8 +10,6 @@ export const MovieView = ({ movies, token, user, addToFavourites }) => {
     const { movieId } = useParams();
     const movie = movies.find((m) => m.id === movieId);
     
-    
-
     return (
         <Row className="justify-content-md-center">
             <Col md={8}>
