@@ -2,12 +2,18 @@ import "./movie-view.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
-export const MovieView = ({ movie, onBackClick }) => {
+
+export const MovieView = ({ movies, token, user, addToFavourites }) => {
+    const { movieId } = useParams();
+    const movie = movies.find((m) => m.id === movieId);
+    
     return (
         <Row className="justify-content-md-center">
             <Col md={8}>
-                <img src={movie.imagePath} />
+                <img src={movie.imagePath} alt={movie.title} classname="movie-image" />
             </Col>
             <Col>
                 <span>Title: </span>
@@ -17,13 +23,23 @@ export const MovieView = ({ movie, onBackClick }) => {
                 <span>Description: </span>
                 <span>{movie.description}</span>
             </Col>
-            <Button 
-              onClick={onBackClick} 
-              className="back-button"
-              style={{ cursor: "pointer" }}
-              >
-                Back
-            </Button>
+            <Col>
+                <Button
+                    variant="primary"
+                    onClick={() => addToFavourites(movie.id)}
+                    style={{ cursor: "pointer" }}
+                    >
+                        Add to Favourites
+                </Button>
+            </Col>
+            <Link to={`/`}>
+                <Button 
+                className="back-button"
+                style={{ cursor: "pointer" }}
+                >
+                    Back
+                </Button>
+            </Link>
         </Row>
     );
 };
