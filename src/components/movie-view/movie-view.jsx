@@ -11,35 +11,36 @@ export const MovieView = ({ movies, token, user, addToFavourites }) => {
     const movie = movies.find((m) => m.id === movieId);
     
     return (
-        <Row className="justify-content-md-center">
-            <Col md={8}>
-                <img src={movie.imagePath} alt={movie.title} classname="movie-image" />
-            </Col>
-            <Col>
-                <span>Title: </span>
-                <span>{movie.title}</span>
-            </Col>
-            <Col>
-                <span>Description: </span>
-                <span>{movie.description}</span>
-            </Col>
-            <Col>
-                <Button
-                    variant="primary"
-                    onClick={() => addToFavourites(movie.id)}
-                    style={{ cursor: "pointer" }}
-                    >
-                        Add to Favourites
-                </Button>
-            </Col>
-            <Link to={`/`}>
-                <Button 
-                className="back-button"
-                style={{ cursor: "pointer" }}
-                >
-                    Back
-                </Button>
-            </Link>
-        </Row>
+            <>
+                <Row className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+                    <Col xs={12} md={8} className="text-center">
+                        
+                        <span><h2>{movie.title}</h2></span><br></br>
+                        <span>Description: </span>
+                        <span>{movie.description}</span>
+                    </Col>
+                    <Col>
+                        <img src={movie.imagePath} alt={movie.title} classname="movie-image" style={{ width: '100%', maxWidth: '400px', height: 'auto' }} // Example: max width of 400px
+                        />
+                        <Button
+                            className="add-to-fav-button"
+                            variant="primary"
+                            onClick={() => addToFavourites(movie.id)}
+                            style={{ cursor: "pointer" }}
+                            >
+                                Add to Favourites
+                        </Button>
+                        <Link to={`/`}>
+                            <Button 
+                            className="back-button"
+                            style={{ cursor: "pointer" }}
+                            >
+                                Back
+                            </Button>
+                        </Link>
+                    </Col>
+                    
+                </Row>
+            </>
     );
 };

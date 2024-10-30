@@ -13199,6 +13199,11 @@ textarea.form-control-lg {
   background-color: #1e90ff;
   border: none;
   border-radius: 4px;
+  margin: 5px;
   padding: 4px 12px;
+}
+
+.add-to-fav-button {
+  margin: 5px;
 }
 /*# sourceMappingURL=index.2212206d.css.map */
